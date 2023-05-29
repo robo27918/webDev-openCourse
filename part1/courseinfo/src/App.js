@@ -1,3 +1,32 @@
+const Header = (props) => {
+/*
+  This component is in charge of rendering the name of the course
+*/
+return (
+<h1>
+  {props.coursename}
+</h1>)
+}
+
+const Content = (props) => {
+  /*
+  This component is in charge of rendering the parts andd their number
+  of exercises
+  */
+ return (<p>
+  {props.part} {props.numEx}
+ </p>)
+
+}
+const Total = (props) => {
+/*
+renders the number of exercises
+*/
+return(
+  <p>Number of exercises: {props.totalEx}</p>
+)
+}
+
 const App = () => {
   const course = "Half  Stack application development"
   const part1 = "Fundamentals of React"
@@ -9,17 +38,11 @@ const App = () => {
 
   return (
     <div>
-      <h1>{course}</h1>
-      <p> 
-        {part1} {exercises1}
-      </p>
-      <p>
-        {part2} {exercises2}
-      </p>
-      <p>
-        {part3} {exercises3}
-      </p>
-      <p>Number of exercises {exercises1 + exercises2 + exercises3}</p>
+     <Header coursename={course}/>
+     <Content part={part1} numEx= {exercises1}/>
+     <Content part={part2} numEx={exercises2}/>
+     <Content part={part3} numEx={exercises3}/>
+     <Total totalEx={exercises1+exercises2+exercises3}/>
     </div>
   )
 }
