@@ -13,9 +13,14 @@ const Content = (props) => {
   This component is in charge of rendering the parts andd their number
   of exercises
   */
- return (<p>
-  {props.part} {props.numEx}
- </p>)
+ return (
+  <div>
+    <Part data={props.contentData[0]} />
+    <Part data={props.contentData[1]}/>
+    <Part data={props.contentData[2]}/>
+
+  </div>
+ )
 
 }
 const Total = (props) => {
@@ -27,22 +32,31 @@ return(
 )
 }
 
+const Part = (props) => {
+  return(
+    <p>
+      {props.data.part} {props.data.numEx}
+    </p>
+  )
+}
+
 const App = () => {
   const course = "Half  Stack application development"
-  const part1 = "Fundamentals of React"
-  const exercises1 = 10
-  const part2 ="Using props to pass data"
-  const exercises2 = 7
-  const part3 = "State of a component"
-  const exercises3 = 14
+  
+
+  const contentData = [
+    {part:"Fundamentals of React", numEx: 10},
+    {part:"Using props to pass data", numEx:7},
+    {part:"State of a component", numEx:14}
+
+  ]
+  const totalEx = contentData[0].numEx + contentData[1].numEx + contentData[2].numEx
 
   return (
     <div>
      <Header coursename={course}/>
-     <Content part={part1} numEx= {exercises1}/>
-     <Content part={part2} numEx={exercises2}/>
-     <Content part={part3} numEx={exercises3}/>
-     <Total totalEx={exercises1+exercises2+exercises3}/>
+     <Content contentData={contentData}/>
+     <Total totalEx= {totalEx} />
     </div>
   )
 }
