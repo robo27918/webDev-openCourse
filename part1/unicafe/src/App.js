@@ -8,10 +8,9 @@ const Button = ({handleClick,text}) => (
 const StatisticLine = ({text, data}) => {
   console.log("printing from StatisticLine component")
   return(
-    <div>
-      {text} {data}
-      <br/>
-    </div>
+    <tr>
+      <td>{text}</td> <td> {data}</td>
+    </tr>
   )
 }
 
@@ -25,13 +24,14 @@ const Statistics = ({good,neutral,bad}) => {
   return(
     <div>
     <h1><strong>statistics</strong></h1>
-   
-     <StatisticLine text="good: " data={good}/>
-     <StatisticLine text="neutral: " data={neutral}/>
-     <StatisticLine text="bad: " data={bad}/>
-     <StatisticLine text="all: " data={total} />
-     <StatisticLine text="avg: " data={avg}/> 
-     <StatisticLine text="pos: " data={pos + "%"}/> 
+     <table>
+     <StatisticLine text="good" data={good}/>
+     <StatisticLine text="neutral" data={neutral}/>
+     <StatisticLine text="bad" data={bad}/>
+     <StatisticLine text="all " data={total} />
+     <StatisticLine text="average" data={avg}/> 
+     <StatisticLine text="positive" data={pos + "%"}/> 
+     </table>
     </div>
     
   )}
