@@ -12,9 +12,10 @@ const Statistics = ({good,neutral,bad}) => {
   const total = good + neutral + bad
   const avg = (good * 1 + neutral * 0 + bad * -1) / total
   const pos = (good) / total * 100
+  if (total > 0){
   return(
     <div>
-    <h1><strong>statisitcs</strong></h1>
+    <h1><strong>statistics</strong></h1>
     <p>
       good: {good} 
      <br/>
@@ -30,7 +31,16 @@ const Statistics = ({good,neutral,bad}) => {
     </p>
     </div>
     
-  )
+  )}
+  else{
+    return(
+      <div>
+        <h1><strong>statistics</strong></h1>
+        <br/>
+        No feedback given
+      </div>
+    )
+  }
 }
 const App = () => {
   //save clicks of each button to its own state
