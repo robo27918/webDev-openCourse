@@ -19,6 +19,8 @@ const App = () => {
     'Programming without an extremely heavy use of console.log is same as if a doctor would refuse to use x-rays or blood tests when diagnosing patients.',
     'The only way to go fast, is to go well.'
   ]
+
+  
   const handleNextClick = () =>{
     console.log("value of ...")
     //
@@ -28,13 +30,29 @@ const App = () => {
     console.log("randomIdx generated", randoIdx)
     setSelected(randoIdx)
   }
+  const handleVoteClick=() => {
+    console.log("handling the vote clicks")
+    console.log("the current idx of the anecdote is:",selected)
+    const cpyvotes = {...votes}
+    cpyvotes[selected] +=1
+    setVotes(cpyvotes)
+
+    
+  }
   const [selected,setSelected] = useState(0)
+  const [votes, setVotes] = useState({0:0, 1:0, 2:0, 3:0, 4:0, 5:0, 6:0,7:0})
+  console.log("printing object init state", votes)
+
+
   
 
   return (
     <div>
       {anecdotes[selected]}
       <br/>
+      has {votes[selected]} votes
+      <br/>
+      <Button handleClick={handleVoteClick} text="vote"></Button>
       <Button handleClick={handleNextClick} text="next anecdote"></Button>
     </div>
   )
