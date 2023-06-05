@@ -16,7 +16,12 @@ const PopularVote = ({anecdotes,votes}) =>
    
   )}
   else{
-     return(anecdotes[mostVoted])
+     return(
+      <div>
+      {anecdotes[mostVoted]}
+      <br/>
+      has {votes[mostVoted]} votes
+      </div>)
   }
   
 }
