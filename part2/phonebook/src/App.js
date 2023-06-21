@@ -1,6 +1,19 @@
 import Contact from './components/Contacts'
 import {useState} from 'react'
+const getNames = (contacts)=>
+{
+  var nameArray = [];
+  for (var key in contacts)
+    nameArray.push(contacts[key].name)
+  return nameArray
+}
+const contactAlreadyExists= (contacts ,searchVal) =>
+{
 
+  console.log("from contactAlreadyExists...")
+  let names = getNames(contacts)
+  return names.includes(searchVal)
+}
 const App = (props) =>{
   console.log("print from App component")
   console.log(props.contacts[0].name)
@@ -10,14 +23,25 @@ const App = (props) =>{
   const addContact = (event) => {
     event.preventDefault()
     console.log('button clicked', event.target)
-    const nameObject ={
-      id: contacts.length +1,
-      name: newName,
-      number: "xxx-xxx-xxx",
+    console.log("from addContact func")
+    console.log("contacts",contacts)
+    console.log("newName",newName)
+
+    if (contactAlreadyExists(contacts, newName)){
+      
+      alert(newName + " has already been added...")
     }
-    
-    setContacts(contacts.concat(nameObject))
-    setNewName('')
+    else{
+      console.log("inside else....")
+      const nameObject ={
+        id: contacts.length +1,
+        name: newName,
+        number: "xxx-xxx-xxx",
+      }
+      
+      setContacts(contacts.concat(nameObject))
+      setNewName('')
+    }
   }
   
   const handleContactChange=(event)=>
