@@ -20,6 +20,7 @@ const App = (props) =>{
   const [contacts,setContacts] = useState(props.contacts)
   const [newName, setNewName] = useState('')
   const [newNumber, setNewNumber] = useState('')
+  const [searchName,setNewSearchName] = useState('')
   const addContact = (event) => {
     event.preventDefault()
     console.log('button clicked', event.target)
@@ -58,6 +59,13 @@ const App = (props) =>{
   return (
     <div>
       <h2>Phonebook</h2>
+       <form> 
+        <div>
+          filter shown with: <input value={searchName}></input>
+        </div>
+       </form>
+       <br></br>
+       <h2>add a new</h2>
       <form onSubmit={addContact}>
         <div>
           name: <input value={newName} onChange={handleContactChange}/>
