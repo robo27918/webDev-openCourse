@@ -19,7 +19,7 @@ const App = (props) =>{
   console.log(props.contacts[0].name)
   const [contacts,setContacts] = useState(props.contacts)
   const [newName, setNewName] = useState('')
-
+  const [newNumber, setNewNumber] = useState('')
   const addContact = (event) => {
     event.preventDefault()
     console.log('button clicked', event.target)
@@ -36,11 +36,12 @@ const App = (props) =>{
       const nameObject ={
         id: contacts.length +1,
         name: newName,
-        number: "xxx-xxx-xxx",
+        number: newNumber,
       }
       
       setContacts(contacts.concat(nameObject))
       setNewName('')
+      setNewNumber('')
     }
   }
   
@@ -49,15 +50,24 @@ const App = (props) =>{
     console.log(event.target.value)
     setNewName(event.target.value)
   }
+  const handleNumberChange=(event)=>
+  {
+    console.log(event.target.value)
+    setNewNumber(event.target.value)
+  }
   return (
     <div>
       <h2>Phonebook</h2>
       <form onSubmit={addContact}>
         <div>
           name: <input value={newName} onChange={handleContactChange}/>
-          </div>
-          <div>
-            <button type="submit">add</button>
+        </div>
+        <div>
+          number: <input value={newNumber} onChange={handleNumberChange}/>
+        </div>
+          
+        <div>
+          <button type="submit">add</button>
         </div>
       </form>
       <h2>Numbers</h2>

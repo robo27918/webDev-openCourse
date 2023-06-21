@@ -3,6 +3,6 @@ const Contact = ({contact})=> {
     console.log("contact name", contact.name)
     console.log("contact id", contact.id)
     return (
-    <li>{contact.name}</li>)
+    <li>{contact.name} {contact.number}</li>)
 }
 export default Contact
