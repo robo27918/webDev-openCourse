@@ -1,88 +1,32 @@
 import Contact from './components/Contacts'
+import PersonForm from './components/PersonForm';
+import ContactList from './components/ContactList';
+import Filter from './components/Filter';
 import {useState} from 'react'
-const getNames = (contacts)=>
-{
-  var nameArray = [];
-  for (var key in contacts)
-    nameArray.push(contacts[key].name)
-  return nameArray
-}
-const contactAlreadyExists= (contacts ,searchVal) =>
-{
 
-  console.log("from contactAlreadyExists...")
-  let names = getNames(contacts)
-  return names.includes(searchVal)
-}
+
 const App = (props) =>{
   console.log("print from App component")
-  console.log(props.contacts[0].name)
+ 
   const [contacts,setContacts] = useState(props.contacts)
   const [newName, setNewName] = useState('')
   const [newNumber, setNewNumber] = useState('')
   const [searchName,setNewSearchName] = useState('')
-  const addContact = (event) => {
-    event.preventDefault()
-    console.log('button clicked', event.target)
-    console.log("from addContact func")
-    console.log("contacts",contacts)
-    console.log("newName",newName)
-
-    if (contactAlreadyExists(contacts, newName)){
-      
-      alert(newName + " has already been added...")
-    }
-    else{
-      console.log("inside else....")
-      const nameObject ={
-        id: contacts.length +1,
-        name: newName,
-        number: newNumber,
-      }
-      
-      setContacts(contacts.concat(nameObject))
-      setNewName('')
-      setNewNumber('')
-    }
-  }
-  
-  const handleContactChange=(event)=>
-  {
-    console.log(event.target.value)
-    setNewName(event.target.value)
-  }
-  const handleNumberChange=(event)=>
-  {
-    console.log(event.target.value)
-    setNewNumber(event.target.value)
-  }
+  const [contactsToShow, setContactsToShow] = useState(props.contacts)
+  //used to store only relavent contacts...
+  console.log("contacts from App",contacts)
   return (
     <div>
       <h2>Phonebook</h2>
-       <form> 
-        <div>
-          filter shown with: <input value={searchName}></input>
-        </div>
-       </form>
+       <Filter contacts={contacts} setContactsToShow={setContactsToShow} setNewSearchName={setNewSearchName} searchName={searchName}/>
        <br></br>
+       
        <h2>add a new</h2>
-      <form onSubmit={addContact}>
-        <div>
-          name: <input value={newName} onChange={handleContactChange}/>
-        </div>
-        <div>
-          number: <input value={newNumber} onChange={handleNumberChange}/>
-        </div>
-          
-        <div>
-          <button type="submit">add</button>
-        </div>
-      </form>
+        <PersonForm setContacts={setContacts} contacts ={contacts} newName={newName}setNewName={setNewName}
+        newNumber ={newNumber} setNewNumber={setNewNumber} contactsToShow={contactsToShow} setContactsToShow={setContactsToShow}/>
+      
       <h2>Numbers</h2>
-      <ul>
-        {contacts.map(contact=> <Contact key={contact.id} contact={contact}/>
-        )}
-      </ul>
+      <ContactList contactsToShow={contactsToShow}/>
     </div>
   )
 }
