@@ -1,9 +1,22 @@
+import axios from 'axios'
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-
 import App from './App'
+ReactDOM.createRoot(document.getElementById('root')).render(<App/>)
+/*** 
+axios
+.get('http://localhost:3001/notes').
+then(response=>{
+    const notes = response.data
+    console.log(notes)
+   
+})
 
-const notes = [
+//const promise2 = axios.get('http://localhost:3001/foobar')
+//console.log(promise2)
+***/
+
+/***const notes = [
   {id:1,
   content:"html is easy",
   important: true},
@@ -24,6 +37,7 @@ const notes = [
     content:"This is a made up of list item",
     important: true
   }
-  
 ]
-ReactDOM.createRoot(document.getElementById('root')).render(<App notes={notes}/>)
+***/
+
+
