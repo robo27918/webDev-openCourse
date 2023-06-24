@@ -10,10 +10,16 @@ const Filter =({contacts,setContactsToShow,setNewSearchName,searchName})=>
     }
     const contactAlreadyExists= (contacts ,searchVal) =>
     {
-
+      
         console.log("from contactAlreadyExists...")
         let names = getNames(contacts)
-        return names.includes(searchVal)
+        
+        let lowerCaseNames = names.map((name)=> {
+          console.log("from contactAlready exists method..", name)
+          return name.toLowerCase()
+        })
+        
+        return lowerCaseNames.includes(searchVal.toLowerCase())
     }
     const handleFilterChange = (event) =>
     {
