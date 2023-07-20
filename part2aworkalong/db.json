@@ -19,6 +19,16 @@
       "content": "POST is cool",
       "important": true,
       "id": 4
+    },
+    {
+      "content": "Here is a new note!",
+      "important": true,
+      "id": 5
+    },
+    {
+      "content": "And another note to be added",
+      "important": true,
+      "id": 6
     }
   ]
 }
