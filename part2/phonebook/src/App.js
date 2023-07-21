@@ -4,6 +4,7 @@ import ContactList from './components/ContactList';
 import Filter from './components/Filter';
 import {useState, useEffect} from 'react'
 import axios from 'axios'
+import contactService from './services/contacts'
 
 
 const App = () =>{
@@ -16,6 +17,7 @@ const App = () =>{
   const [contactsToShow, setContactsToShow] = useState(contacts)
 
   //fetching data with axios from db.json
+  /**
   const hook = () =>{
     console.log('effect')
     axios
@@ -27,9 +29,17 @@ const App = () =>{
           setContactsToShow(response.data)
         }
         )
-  }
+  }***/
+
   //using the effect
-  useEffect(hook,[])
+  useEffect(() => {
+    contactService
+    .getAll()
+    .then(initalContacts => {
+      setContacts(initalContacts)
+      setContactsToShow(initalContacts)
+    })
+  },[])
   console.log("render", contacts.length, "contacts")
   //used to store only relavent contacts...
   //console.log("contacts from App",contacts)

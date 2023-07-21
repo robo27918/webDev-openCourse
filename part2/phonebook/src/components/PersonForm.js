@@ -1,5 +1,6 @@
 
 import axios from 'axios'
+import contactService from '../services/contacts'
 const PersonForm = ({setContacts,contacts,newName,setNewName,newNumber,setNewNumber,setContactsToShow})=>
 {   
     console.log("from PersonForm...")
@@ -34,6 +35,17 @@ const PersonForm = ({setContacts,contacts,newName,setNewName,newNumber,setNewNum
                 name: newName,
                 number: newNumber,
             }
+
+            contactService
+                .create(nameObject)
+                .then(returnedContact => {
+                    
+                    setContacts(contacts.concat(returnedContact))
+                    setContactsToShow(contacts.concat(returnedContact))
+                    setNewName('')
+                    setNewNumber('')
+                })
+            /** 
             axios
                 .post('http://localhost:3007/persons', nameObject)
                 .then(response => {
@@ -43,7 +55,7 @@ const PersonForm = ({setContacts,contacts,newName,setNewName,newNumber,setNewNum
                     setNewName('')
                     setNewNumber('')
 
-                })
+                })**/
                 /**
                  *  previous incarnation without saving the data to the backend server...
                  *  
