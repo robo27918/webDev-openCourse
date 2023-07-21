@@ -1,4 +1,5 @@
 
+import axios from 'axios'
 const PersonForm = ({setContacts,contacts,newName,setNewName,newNumber,setNewNumber,setContactsToShow})=>
 {   
     console.log("from PersonForm...")
@@ -33,11 +34,26 @@ const PersonForm = ({setContacts,contacts,newName,setNewName,newNumber,setNewNum
                 name: newName,
                 number: newNumber,
             }
-            contacts.concat(nameObject)
-            setContacts(contacts.concat(nameObject))
-            setContactsToShow(contacts.concat(nameObject))
-            setNewName('')
-            setNewNumber('')
+            axios
+                .post('http://localhost:3007/persons', nameObject)
+                .then(response => {
+                    contacts.concat(nameObject)
+                    setContacts(contacts.concat(nameObject))
+                    setContactsToShow(contacts.concat(nameObject))
+                    setNewName('')
+                    setNewNumber('')
+
+                })
+                /**
+                 *  previous incarnation without saving the data to the backend server...
+                 *  
+                 * contacts.concat(nameObject)
+                    setContacts(contacts.concat(nameObject))
+                    setContactsToShow(contacts.concat(nameObject))
+                    setNewName('')
+                    setNewNumber('')
+                 * 
+                 */
 
 
             console.log("from PersonForm",contacts)
