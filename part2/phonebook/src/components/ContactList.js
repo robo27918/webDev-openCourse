@@ -1,9 +1,9 @@
 import Contact from "./Contacts"
-const ContactList =({contactsToShow}) =>
+const ContactList =({contactsToShow, removeContact}) =>
 {
     return(
         <ul>
-        {contactsToShow.map(contact=> <Contact key={contact.id} contact={contact}/>)}
+        {contactsToShow.map(contact=> <Contact key={contact.id} contact={contact} removeContact={()=>removeContact(contact.id)}/>)}
       </ul>
     )
 }

@@ -16,20 +16,32 @@ const App = () =>{
   const [searchName,setNewSearchName] = useState('')
   const [contactsToShow, setContactsToShow] = useState(contacts)
 
-  //fetching data with axios from db.json
-  /**
-  const hook = () =>{
-    console.log('effect')
-    axios
-      .get('http://localhost:3007/persons')
-      .then( response =>
-        {
-          console.log('promise fullfilled',response.data)
-          setContacts(response.data)
-          setContactsToShow(response.data)
-        }
-        )
-  }***/
+  //onClick handler to delete contact and the associated 
+  //phone number
+  const removeContact = (id) =>{
+    //TODO: use contactService to delete particular contact as 
+    //specified by the id that is passed to this function
+    if (window.confirm("Do you really wanna delete this contact"))
+    contactService
+      .deleteNote(id)
+      .then(response => {
+        console.log(`Deleted post with ID ${id}`);
+        //rerender page with another call to contact service
+        // this probably a function on its own but for time sake we can do this until
+        contactService 
+        .getAll()
+        .then(initalContacts => {
+          setContacts(initalContacts)
+          setContactsToShow(initalContacts)
+        })
+
+      })
+      .catch(error => {
+        console.error(error);
+      });
+      
+
+  }
 
   //using the effect
   useEffect(() => {
@@ -54,7 +66,10 @@ const App = () =>{
         newNumber ={newNumber} setNewNumber={setNewNumber} contactsToShow={contactsToShow} setContactsToShow={setContactsToShow}/>
       
       <h2>Numbers</h2>
-      <ContactList contactsToShow={contactsToShow}/>
+      <ContactList
+       contactsToShow={contactsToShow}
+        removeContact={removeContact}
+        />
     </div>
   )
 }

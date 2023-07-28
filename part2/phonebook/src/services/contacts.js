@@ -15,5 +15,13 @@ const update = (id, newObject) => {
     const request = axios.put(`${baseUrl}/${id}`, newObject)
     return request.then(response => response.data)
 }
+//deleteNote method added to fullfill requirement of 
+const deleteNote = (id) => {
+    console.log('from deleteNote in contactService...')
+    console.log('id is ', id)
+    const request = axios.delete(`${baseUrl}/${id}`)
+    return request.then(response => {
+        console.log(response.data)})
+}
 
-export default{ getAll, create, update}
+export default{ getAll, create, update, deleteNote}
